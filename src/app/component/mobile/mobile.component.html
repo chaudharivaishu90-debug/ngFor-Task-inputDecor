@@ -1,0 +1,55 @@
+<div class="card" [ngClass]="{noProduct:!mobileObj.isAvailable}">
+  <div class="card-body">
+    <div class="row">
+
+      <div class="col-md-3">
+        <!-- <div class="img-container">
+          <img
+            [src]="mobileObj.image ? mobileObj.image : 'https://developers.elementor.com/docs/hooks/placeholder-image/'"
+            [alt]="mobileObj.name"
+            class="img-fluid"
+          >
+        </div> -->
+
+        <div class="img-container">
+            <img [src]="mobileObj.image" [alt]="mobileObj.name" *ngIf="mobileObj.image && !imageError; else noimage"
+  (error)="imageError = true">
+                
+            <ng-template #noimage>
+                
+                <p>No Product Image</p>
+            </ng-template>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <h3>{{mobileObj.name}} <small class="badge" 
+            [ngClass]="{
+                'badge-success':mobileObj.rating >=4,
+            'badge-warning':mobileObj.rating >=3 && mobileObj.rating < 4,
+            'badge-danger':mobileObj.rating <3
+        }">{{mobileObj.rating}}</small>
+    </h3>
+
+    <h4>Features:</h4>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let feature of mobileObj.features">
+                {{feature}}
+        </li>
+    </ul>
+
+      </div>
+
+      <div class="col-md-3">
+        <h4>{{mobileObj.price|currency:"INR"}}
+           <br> <small><del>{{mobileObj.price+(mobileObj.price*.1)|currency:"INR" }}</del></small>
+        </h4>
+        <strong class="text-danger" *ngIf="mobileObj.noOfItems < 10">Only {{mobileObj.noOfItems}} Left!!! </strong>
+      </div>
+
+    </div>
+  </div>
+
+  <p class="text-danger Noproductmsg" *ngIf="!mobileObj.isAvailable">Out of Stock!!</p>
+
+</div>

@@ -1,0 +1,15 @@
+<h1 class="text-center alert alert-primary">Mobile Product task</h1>
+
+<div class="row" *ngIf="MobArr.length > 0; else nomobile">
+
+  <div class="col-12 mb-3" *ngFor="let mobile of MobArr">
+    <app-mobile [mobileObj]="mobile"></app-mobile>
+  </div>
+
+</div>
+
+<ng-template #nomobile>
+  <p class="alert alert-info">
+    No mobile added yet
+  </p>
+</ng-template>
